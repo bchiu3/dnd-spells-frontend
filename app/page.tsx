@@ -4,6 +4,7 @@ import Image from "next/image";
 import getSpells from "@/lib/spells";
 import { useEffect, useState } from "react";
 import { useSearchParams } from 'next/navigation';
+import Navigation from "@/app/navigation/navigation";
 
 export default function Page() {
   const searchParams = useSearchParams();
@@ -24,6 +25,7 @@ export default function Page() {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
+      <Navigation/>
       <button onClick={() => setPage(page + 1)}>Next</button>
       <p>{JSON.stringify(spells)}</p>
     </main>

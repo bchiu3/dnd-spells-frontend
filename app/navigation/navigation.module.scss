@@ -1,0 +1,9 @@
+$border-color-gradient-start: #EAAD12;
+$border-color-gradient-end: #B28856;
+
+.module {
+    border-image: linear-gradient(to right, $border-color-gradient-start, $border-color-gradient-end) 1;
+    height: 60px;
+    display: flex;
+    align-items: center;
+};

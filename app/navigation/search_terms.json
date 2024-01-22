@@ -1,0 +1,45 @@
+{
+    "Class": {
+        "Artificer": "artificer",
+        "Bard": "bard",
+        "Cleric": "cleric",
+        "Druid": "druid",
+        "Paladin": "paladin",
+        "Ranger": "ranger",
+        "Sorcerer": "sorcerer",
+        "Warlock": "warlock",
+        "Wizard": "wizard"
+    },
+    "Components": {
+        "Verbal": "Verbal",
+        "Somatic": "Somatic",
+        "Material": "Material"
+    },
+    "School": {
+        "Abjuration": "abjuration",
+        "Conjuration": "conjuration",
+        "Divination": "divination",
+        "Enchantment": "enchantment",
+        "Evocation": "evocation",
+        "Illusion": "illusion",
+        "Necromancy": "necromancy",
+        "Transmutation": "transmutation",
+        "Unknown": "unknown"
+    },
+    "Range Type": {
+        "Self": "Self",
+        "Touch": "Touch",
+        "Sight": "Sight",
+        "Special": "Special",
+        "Unlimited": "Unlimited",
+        "Units": "Units",
+        "Unknown": "Unknown"
+    },
+    "Cast Type": {
+        "Action": "Action",
+        "Bonus": "Bonus",
+        "Reaction": "Reaction",
+        "Time": "Time",
+        "Unknown": "Unknown"
+    }
+}
