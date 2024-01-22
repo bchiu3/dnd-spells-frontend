@@ -6,6 +6,10 @@ export default function Navigation() {
     return (
         <div className={clsx("fixed top-0 w-full border-b-4 bg-black", styles.module)}>
             <Image src="/header-logo.png" alt="dnd-spells-logo" width={87} height={57}/>
+            <div className="inputgroup"> 
+                <span className="innericon searchicon"></span>
+                <input type="text" className="search" placeholder="search..." />
+            </div>
         </div>
     )
 }
