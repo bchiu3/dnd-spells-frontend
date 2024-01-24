@@ -1,9 +1,38 @@
-$border-color-gradient-start: #EAAD12;
-$border-color-gradient-end: #B28856;
+@use 'app/styles/variables' as *;
 
 .module {
     border-image: linear-gradient(to right, $border-color-gradient-start, $border-color-gradient-end) 1;
     height: 60px;
     display: flex;
     align-items: center;
+    gap: 8px;
+};
+
+.search {
+    border: 0;
+    outline: 0;
+    background: $peach-tone;
+    color: black;
+    font-size: 16px;
+    height: 27px;
+    padding: 0px 1em;
+    box-sizing: border-box;
+};
+
+.input_container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    flex: 1 0 auto;
+};
+
+.border {
+    position: absolute;
+    height: 60%;
+    pointer-events: none;
+}
+
+.search_icon {
+    position: absolute;
 };

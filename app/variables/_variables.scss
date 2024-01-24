@@ -1,0 +1,10 @@
+$border-color-gradient-start: #EAAD12;
+$border-color-gradient-end: #B28856;
+$peach-tone: #F4F1EC;
+$peach-tone-end: #FBEBCB;
+$color-overlay-start: #FFD700;
+$color-overlay-end: #EAAD12;
+$color-overlay: linear-gradient(180deg, $color-overlay-start 0%, $color-overlay-end 100%);
+$color-overlay-line: linear-gradient(90deg, $color-overlay-start 0%, $color-overlay-end 100%);
+$standard-background: #000744;
+$selector-height: 27px;

@@ -1,0 +1,45 @@
+@use 'app/styles/variables' as *;
+
+.select_control {
+    min-width: 220px;
+    max-width: 70vw;
+    padding: 0 1rem;
+    font-size: 16px;
+    border: 0;
+    border-radius: 0;
+    background: $peach-tone;
+    min-height: $selector-height !important;
+}
+
+.select_multiValue {
+    margin: 0 2px;
+    background: $color-overlay-line;
+    border-radius: 5px;
+}
+
+.select_menu {
+    background: $peach-tone;
+    border-top: 1px solid black;
+    z-index: 20;
+}
+
+.search_icon {
+};
+
+.select_indicatorsContainer {
+    content: '';
+}
+
+.input_container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    flex: 1 0 auto;
+};
+
+.border {
+    position: absolute;
+    pointer-events: none;
+    z-index: 10;
+}

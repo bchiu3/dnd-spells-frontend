@@ -1,0 +1,119 @@
+@use 'app/styles/variables' as *;
+
+.container {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    height: 120px;
+    justify-content: center;
+    align-items: center;
+}
+
+.recommended_container {
+    background: linear-gradient(90deg, $peach-tone 0%, $peach-tone-end 100%);
+}
+
+.nonrecommended_container {
+    background: $peach-tone;
+}
+
+.border {
+    width: 75%;
+    position: absolute;
+    pointer-events: none;
+}
+
+.card {
+    display: grid;
+    grid-template-columns: auto 22px;
+    padding: .25rem 1.5rem;
+    width: 100%;
+    height: 100%;
+}
+
+.card_header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 4px;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.card_content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 2px;
+}
+
+.card_description {
+    overflow-y: hidden;
+    max-height: 56px;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.icon_list {
+    height: 112px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    align-items: flex-end;
+    padding-top: 4px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.icon_list_modal {
+    height: auto; 
+    flex-direction: row;
+
+}
+
+.icon_container {
+    text-transform: capitalize;
+    font-size: 9px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    .icon_tooltip {
+        position: absolute;
+        display: none;
+    }
+}
+
+.icon_container:active, .icon_container:hover {
+    .icon_tooltip {
+        display: block;
+        position: absolute;
+        font-size: 12px;
+        font-weight: 400;
+        transform: translate(-75%, -0px);
+        background-color: #1f1e1e;
+        border-radius: 5px;
+        color: white;
+        padding: 2px 4px;
+        z-index: 5;
+    }
+    .icon_tooltip_modal{
+        transform: translate(0, 28px);
+    }
+}
+
+.icon {
+    background: #1f1e1eb9;
+    border-radius: 5px;
+    color: red;
+    width: 16px;
+    height: 16px;
+}
+
+.icon_modal {
+    width: 28px;
+    height: 28px;
+}

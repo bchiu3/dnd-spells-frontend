@@ -1,0 +1,106 @@
+@use 'app/styles/variables' as *;
+
+$max_modal_width: 500px;
+$max_modal_height: 700px;
+$modal_width: min(90vw, $max_modal_width);
+$modal_height: min(95vh, $max_modal_height);
+
+.modal_container {
+    width: $modal_width;
+    height: $modal_height;
+    background-color: $peach-tone;
+    border-radius: 50px 0px;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal {
+    display: flex;
+    flex-direction: column;
+    padding: 0px 20px;
+    gap: 8px;
+    color: #000000
+}
+
+.modal_header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: #000;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.modal_line {
+    width: min(75vw, calc($max_modal_width - ($max_modal_width/4)));
+    height: 2px;
+    background: $color-overlay-line;
+    transform: translateX(-12%);
+    border-radius: 5px;
+}
+
+.modal_description{
+    color: #000;
+    overflow: scroll;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    height: calc($modal_height * .60);
+    ul {
+        list-style: disc;
+        margin-left: 1rem;
+    }
+    table {
+        width:100%;
+    }
+    tbody{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        th {
+            flex: 1;
+            text-align: left;
+            padding: 0px 8px;
+        }
+        tr {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            width: 100%;
+            border: 1px solid #171717da;
+        }
+        td {
+            flex: 1;
+            padding: 0px 8px;
+        }
+    }
+}
+
+.gradient_container {
+    display: flex;
+    align-items: center;
+  
+    position: relative;
+    box-sizing: border-box;
+
+    $border: 4px;
+    color: #FFF;
+    background: $color-overlay;
+    background-clip: padding-box; /* !importanté */
+    border: solid $border transparent; /* !importanté */
+    border-radius: 54px 0px;
+
+    &:before {
+        content: '';
+        position: absolute;
+        top: 0; right: 0; bottom: 0; left: 0;
+        z-index: -1;
+        margin: -$border; /* !importanté */
+        border-radius: inherit; /* !importanté */
+        background: $color-overlay;
+    }
+}
