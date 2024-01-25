@@ -3,7 +3,7 @@
     "short_name": "BG3",
     "description": "DnD Campaign stuff, icon made by Laureeeeeeeeeeeeeeen",
     "theme_color": "#FFD700",
-    "background_color": "#FFD700",
+    "background_color": "#291a00",
     "display": "standalone",
     "orientation": "portrait",
     "scope": "/",
