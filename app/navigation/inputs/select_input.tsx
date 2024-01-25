@@ -13,7 +13,7 @@ interface Size {
 
 export type SelectInputProps = {
     options: any[]
-    onChange: Function
+    onChange: (...args: any) => any
     value: string
     inModal?: boolean
     searchParam?: string
@@ -36,6 +36,7 @@ export default function SelectInput({options, onChange, value, inModal, searchPa
     const [change, setChange] = useState(false);
     const border = useRef<HTMLImageElement>(null);
     searchParam = searchParam || "";
+    const [holdValue, setHoldValue] = useState<string>(value);
 
     const OptionsMap: {[key:string]: any}= {};
     for (const option of options) {

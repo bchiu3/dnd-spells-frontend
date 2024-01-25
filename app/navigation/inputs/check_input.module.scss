@@ -1,0 +1,35 @@
+@use 'app/variables/variables' as *;
+
+.gradient_container {
+    display: flex;
+    align-items: center;
+  
+    position: relative;
+    box-sizing: border-box;
+
+    $border: 4px;
+    color: #FFF;
+    background: $color-overlay;
+    background-clip: padding-box; /* !importanté */
+    border: solid $border transparent; /* !importanté */
+    border-radius: 6px 0px;
+
+    &:before {
+        content: '';
+        position: absolute;
+        top: 0; right: 0; bottom: 0; left: 0;
+        z-index: -1;
+        margin: -$border; /* !importanté */
+        border-radius: inherit; /* !importanté */
+        background: $color-overlay;
+    }
+}
+
+.modal_container {
+    width: 18px;
+    height: 18px;
+    background-color: $peach-tone;
+    border-radius: 5px 0px;
+    display: flex;
+    flex-direction: column;
+}

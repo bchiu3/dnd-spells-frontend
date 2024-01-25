@@ -33,7 +33,7 @@ const variantsModal = {
 
 interface Seacher {
     value: string,
-    changeHandler: DebouncedState<any>,
+    changeHandler: (...args: any) => any,
     selectOptions: any[],
     searchParam: string,
 }
@@ -48,24 +48,19 @@ export default function Navigation() {
         const searcher = {
             searchParam: key,
             value: value,
-            changeHandler: useDebouncedCallback((newValue: any) => {console.log(newValue); dispatch({type: Setters[key], payload: newValue})}),
+            changeHandler: (newValue: any) => {dispatch({type: Setters[key], payload: newValue})},
             selectOptions: SelectOptions[key],
         }
         searchTerms.push(searcher);
     };
 
-
     const openModal = (e: any) => {
-        searchTerms[0].changeHandler.cancel();
         setNavModal(true);
         document.body.style.overflow = 'hidden';
     };
 
 
     const closeModal = (e: any) => {
-        for (const searcher of searchTerms) {
-            searcher.changeHandler.cancel();
-        }
         setNavModal(false);
         document.body.style.overflow = 'unset';
     };
@@ -111,7 +106,7 @@ export default function Navigation() {
             className={clsx("fixed top-0 w-screen border-b-4 z-10", styles.module)}>
                 <Image className={"pl-1"} src="/header-logo.png" alt="dnd-spells-logo" width={58} height={38} priority={true}/>
                 <SearchInput placeholder={''} value={searchTerms[0].value}
-                onChange={searchTerms[0].changeHandler} />
+                onChange={searchTerms[0].changeHandler}/>
                 <Image src="/hamburger_icon.svg" alt="hamburger-icon" width={17} height={20} className='mr-4' onClick={openModal} />
             </motion.div>
             }

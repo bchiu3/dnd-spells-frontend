@@ -4,7 +4,6 @@ import SpellCard from './spellCard/spell_card';
 import { useInView } from 'react-intersection-observer';
 import { useContext, useEffect, useState } from 'react';
 import { reducerContext } from '../reducer/NavReducer';
-import { useSearchParams } from 'next/navigation';
 import getSpells from '@/lib/spells';
 import { getParamString, useDidUpdateEffect } from '../utils';
 import React from 'react';
