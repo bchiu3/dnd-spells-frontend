@@ -72,6 +72,9 @@
     overflow-y: scroll;
     overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
+    @media (min-width: 768px) {
+        height: 140px;
+    }
 }
 
 .icon_list_modal {

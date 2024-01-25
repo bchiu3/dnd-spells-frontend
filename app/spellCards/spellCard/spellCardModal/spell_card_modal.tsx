@@ -60,13 +60,14 @@ export default function SpellCardModal({modal, closeModal, spell}: SpellCardModa
                             {spell.component_material && 
                                 <motion.div>Material: {spell.component_material}</motion.div>
                             }
-                            {/* <motion.div>School: {spell.school}</motion.div> */}
-                            {/* <motion.div>
+                            {/* <motion.div>School: {spell.school}</motion.div>
+                            <motion.div>
                                 {"Cast Type: "}
                                 {spell.cast_type} 
                                 {(spell.cast_type == CastType.Time || spell.cast_time != 0) && " (" + spell.cast_time + ")"}
                             </motion.div> */}
-                            <motion.div>{(spell.cast_type == CastType.Time || spell.cast_time != 0) && "Cast Time: " + spell.cast_time}</motion.div>
+                            <motion.div>Duration: {spell.duration}</motion.div>
+                            {(spell.cast_type == CastType.Time || spell.cast_time != 0) && <motion.div>{"Cast Time: " + spell.cast_time}</motion.div>}
                             <motion.div>
                                 {"Range: "} 
                                 {spell.range_type != RangeType.Units && spell.range_type + " " }
