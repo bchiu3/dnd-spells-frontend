@@ -91,7 +91,7 @@ export default function Navigation() {
                         document.body
                     )}
                 </motion.div>
-                <Image className={"fixed right-0 mt-1 mr-2 z-10"} src="/exit.svg" alt="exit" width={17} height={20} onClick={closeModal} />
+                <Image className={"fixed right-0 mt-3 mr-4 z-10"} src="/exit.svg" alt="exit" width={17} height={20} onClick={closeModal} />
             </>
             }
             {

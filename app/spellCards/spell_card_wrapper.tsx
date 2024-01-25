@@ -42,12 +42,20 @@ export default function SpellCardWrapper({spells, className}: SpellCardWrapperPr
         }
     }, [state.params]);
 
+    const index_span = (index: number) => {
+        if (index == spells.length - 10) {
+            return (<span ref={ref} className="pb-4"/>)
+        }
+        return (<></>)
+    }
+
     return (
         <div className={clsx(styles.container, className)}>
             {spells.map((spell: any, index: number) => (
                 <React.Fragment key={spell._id}>
-                    <SpellCard spell={spell}/>
-                    {index == spells.length - 10 && <span  ref={ref} className='pb-[1rem]'></span>}
+                    <SpellCard spell={spell}>
+                        {index_span(index)}
+                    </SpellCard>
                 </React.Fragment>
             ))
             }

@@ -11,6 +11,7 @@ import Image from "next/image";
 
 export interface SpellCardProps {
     spell: Spell
+    children: React.ReactNode
 }
 
 interface Size {
@@ -27,7 +28,7 @@ const variants = {
     }
 }
 
-export default function SpellCard({spell}: SpellCardProps) {
+export default function SpellCard({spell, children}: SpellCardProps) {
     const [selectedId, setSelectedId] = useState<string | undefined>(undefined);
     const [size, setSize] = useState<Size>({ width: 0, height: 0 });
     const border = useRef<HTMLImageElement>(null);
@@ -87,6 +88,7 @@ export default function SpellCard({spell}: SpellCardProps) {
             </motion.div>
             <Image src="/card_border.svg" alt="card-border" className={clsx(styles.border)} ref={border} width={307} height={140} priority={true}/>
             {modalHTML}
+            {children}
         </motion.div>
     );
 }
