@@ -70,6 +70,7 @@ export default function Navigation() {
         <AnimatePresence>
             {
             navModal &&
+            <>
                 <motion.div 
                 key="navModal"
                 variants={variantsModal}
@@ -77,7 +78,7 @@ export default function Navigation() {
                 animate = "visible"
                 exit="hidden"
                 transition={{duration: 0.25, ease: "easeInOut"}}
-                className={clsx("fixed top-0 w-screen border-b-4 z-10 pt-1 pb-5", styles.module, styles.module_modal)}>
+                className={clsx("absolute top-0 w-screen border-b-4 z-10 pt-1 pb-20", styles.module, styles.module_modal)}>
                     <Image className={"pt-1"} src="/header-logo.png" alt="dnd-spells-logo" width={71} height={71} priority={true}/>
                     {searchTerms.map((searcher, index) => {
                         if (searcher.selectOptions){
@@ -87,12 +88,13 @@ export default function Navigation() {
                         return <SearchInput key={index} placeholder={''} onChange={searcher.changeHandler} 
                             searchParam={searcher.searchParam} value={searcher.value} inModal />
                     })}
-                    <Image className={"absolute right-0 mt-1 mr-2"} src="/exit.svg" alt="hamburger-icon" width={17} height={20} onClick={closeModal} />
                     {createPortal(
                         <div onClick={closeModal} className={styles.modal_background} />,
                         document.body
                     )}
                 </motion.div>
+                <Image className={"fixed right-0 mt-1 mr-2 z-10"} src="/exit.svg" alt="exit" width={17} height={20} onClick={closeModal} />
+            </>
             }
             {
             !navModal &&
