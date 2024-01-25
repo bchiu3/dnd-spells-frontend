@@ -9,7 +9,6 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { SelectOptions, SingleValueOptions } from '../utils';
 import SelectInput from './inputs/select_input';
 import { createPortal } from 'react-dom';
-import header_logo from "/public/header-logo.png";
 
 
 const variants = {
@@ -79,7 +78,7 @@ export default function Navigation() {
                 exit="hidden"
                 transition={{duration: 0.25, ease: "easeInOut"}}
                 className={clsx("fixed top-0 w-screen border-b-4 z-10 pt-1 pb-5", styles.module, styles.module_modal)}>
-                    <Image className={"pt-1"} src={header_logo} alt="dnd-spells-logo" width={71} height={71} priority={true}/>
+                    <Image className={"pt-1"} src="/header-logo.png" alt="dnd-spells-logo" width={71} height={71} priority={true}/>
                     {searchTerms.map((searcher, index) => {
                         if (searcher.selectOptions){
                             return <SelectInput key={index} value={searcher.value} inModal isSingleValue={!!SingleValueOptions[searcher.searchParam]}
@@ -105,7 +104,7 @@ export default function Navigation() {
             exit="hidden"
             transition={{duration: 0.25, ease: "easeInOut"}}
             className={clsx("fixed top-0 w-screen border-b-4 z-10", styles.module)}>
-                <Image className={"pl-1"} src={header_logo} alt="dnd-spells-logo" width={58} height={38} priority={true}/>
+                <Image className={"pl-1"} src="/header-logo.png" alt="dnd-spells-logo" width={58} height={38} priority={true}/>
                 <SearchInput placeholder={''} value={searchTerms[0].value}
                 onChange={searchTerms[0].changeHandler}/>
                 <Image src="/hamburger_icon.svg" alt="hamburger-icon" width={17} height={20} className='mr-4' onClick={openModal} />
