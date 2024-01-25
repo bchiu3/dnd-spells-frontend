@@ -15,7 +15,7 @@ export default function SpellCardDescription({spell}: SpellCardDescriptionProps)
     return (
         <motion.div className={styles.card_content}>
             <motion.div className={clsx(styles.card_header, lalia.className)}>
-                <Image src={spell.image_url || "https://placehold.co/100x100"} alt="spell-card" width={30} height={30} />
+                <Image src={spell.image_url || "/placeholder.png"} alt="spell-card" width={30} height={30} />
                 <span>{spell.name}</span>
             </motion.div>
             <div className={clsx(lalia.className, "font-normal text-[11px] !italic capitalize")}>
