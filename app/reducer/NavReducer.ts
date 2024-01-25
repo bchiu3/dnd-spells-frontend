@@ -22,7 +22,7 @@ export const initialParamState = {
     "spells": [],
     "params": {
         "name": "",
-        "class": "",
+        "classes": "",
         "level": "",
         "cast_type": "",
         "school": "",
@@ -77,7 +77,7 @@ export const ParamsReducer = (state: any, action: any) => {
                 "spells": [],
                 "params": {
                     ...state.params,
-                    "class": action.payload
+                    "classes": action.payload
                 },
                 "page": 1
             }
