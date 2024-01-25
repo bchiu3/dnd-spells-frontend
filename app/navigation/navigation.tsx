@@ -42,7 +42,6 @@ export default function Navigation() {
     const { state, dispatch } = useContext(reducerContext);
     const [navModal, setNavModal] = useState(false);
 
-
     const searchTerms: Seacher[] = []; 
     for (const [key, value] of Object.entries(state.params)) {
         const searcher = {
@@ -53,6 +52,7 @@ export default function Navigation() {
         }
         searchTerms.push(searcher);
     };
+
 
     const openModal = (e: any) => {
         setNavModal(true);
@@ -78,7 +78,7 @@ export default function Navigation() {
                 animate = "visible"
                 exit="hidden"
                 transition={{duration: 0.25, ease: "easeInOut"}}
-                className={clsx("absolute top-0 w-screen border-b-4 z-10 pt-1 pb-20", styles.module, styles.module_modal)}>
+                className={clsx("fixed top-0 w-screen border-b-4 z-10 pt-1 pb-20", styles.module, styles.module_modal)}>
                     <Image className={"pt-1"} src="/header-logo.png" alt="dnd-spells-logo" width={71} height={71} priority={true}/>
                     {searchTerms.map((searcher, index) => {
                         if (searcher.selectOptions){
@@ -106,9 +106,12 @@ export default function Navigation() {
             exit="hidden"
             transition={{duration: 0.25, ease: "easeInOut"}}
             className={clsx("fixed top-0 w-screen border-b-4 z-10", styles.module)}>
-                <Image className={"pl-1"} src="/header-logo.png" alt="dnd-spells-logo" width={58} height={38} priority={true}/>
+                <Image className={"pl-1"} src="/header-logo.png" alt="dnd-spells-logo" width={58} height={38} priority={true} onClick={(e) => {
+                    e.stopPropagation();
+                    dispatch({type: "reset"});
+                }}/>
                 <SearchInput placeholder={''} value={searchTerms[0].value}
-                onChange={searchTerms[0].changeHandler}/>
+                onChange={searchTerms[0].changeHandler} searchParam={searchTerms[0].searchParam}/>
                 <Image src="/hamburger_icon.svg" alt="hamburger-icon" width={17} height={20} className='mr-4' onClick={openModal} />
             </motion.div>
             }

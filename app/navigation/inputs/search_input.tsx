@@ -46,6 +46,7 @@ export default function SearchInput({placeholder, onChange, value, inModal, sear
         }
     }, [size]);
 
+
     const debounced = useDebouncedCallback(onChange, 300);
 
     onChange = (value: string) => {
@@ -55,7 +56,7 @@ export default function SearchInput({placeholder, onChange, value, inModal, sear
 
     return (
         <div className={clsx('flex flex-col gap-[2px] flex-grow', inModal && "flex-grow-0")}>
-            <div className={clsx(styles.label, lalia.className)}>{sanitizeSearchParams(searchParam)}</div>
+            {inModal && <div className={clsx(styles.label, lalia.className)}>{sanitizeSearchParams(searchParam)}</div>}
             <div className={clsx(styles.input_container, lalia.className)}> 
                 <Image src="/border.svg" alt="border" priority={true} className={clsx(styles.border)} width={220} height={37} ref={border} />
                 <input type="text" className={clsx(styles.search, inModal && styles.search_modal)} value={holdValue} placeholder={placeholder} ref={input} onChange={(e) => onChange(e.target.value)}/>

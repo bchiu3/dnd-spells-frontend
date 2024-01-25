@@ -38,6 +38,8 @@ export const initialParamState = {
 
 export const ParamsReducer = (state: any, action: any) => {
     switch(action.type) {
+        case "reset":
+            return {...initialParamState, "spells": state.spells};
         case "setSpells":
             return {
                 ...state,
