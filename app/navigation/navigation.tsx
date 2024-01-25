@@ -6,7 +6,7 @@ import { DebouncedState, useDebouncedCallback } from 'use-debounce';
 import { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import { reducerContext, Setters } from '../reducer/NavReducer';
 import { AnimatePresence, motion } from 'framer-motion';
-import { SelectOptions } from '../utils';
+import { SelectOptions, SingleValueOptions } from '../utils';
 import SelectInput from './inputs/select_input';
 import { createPortal } from 'react-dom';
 
@@ -81,7 +81,7 @@ export default function Navigation() {
                     <Image className={"py-1"} src="/header-logo.png" alt="dnd-spells-logo" width={108} height={71} priority={true}/>
                     {searchTerms.map((searcher, index) => {
                         if (searcher.selectOptions){
-                            return <SelectInput key={index} value={searcher.value} inModal
+                            return <SelectInput key={index} value={searcher.value} inModal isSingleValue={!!SingleValueOptions[searcher.searchParam]}
                                 onChange={searcher.changeHandler} options={searcher.selectOptions} searchParam={searcher.searchParam}/>
                         }
                         return <SearchInput key={index} placeholder={''} onChange={searcher.changeHandler} 

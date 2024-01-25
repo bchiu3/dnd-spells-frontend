@@ -81,7 +81,34 @@ export const SelectValueMap: {[key: string]: {[key: string]: string}} = {
       [ComponentType.Verbal]: "Verbal",
       [ComponentType.Somatic]: "Somatic",
       [ComponentType.Material]: "Material",
-    }
+    },
+    "has_upcast": {
+      "true": "Upcast Spells",
+      "false": "Non-Upcast Spells",
+      "": "N/A",
+    },
+    "is_ritual": {
+      "true": "Ritual Spells",
+      "false": "Non-Ritual Spells",
+      "": "N/A",
+    },
+    "is_concentration": {
+      "true": "Concentration Spells",
+      "false": "Non-Concentration Spells",
+      "": "N/A",
+    },
+    "is_recommended": {
+      "true": "Recommended Spells",
+      "false": "Non-Recommended Spells",
+      "": "N/A",
+    },
+}
+
+export const SingleValueOptions: {[key: string]: boolean} = {
+  "has_upcast": true,
+  "is_ritual": true,
+  "is_concentration": true,
+  "is_recommended": true,
 }
 
 export const SelectOptions: {[key: string]: {value: string, label: string}[]} = {}; 

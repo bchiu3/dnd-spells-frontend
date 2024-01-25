@@ -11,7 +11,9 @@
 
 .module_modal {
     flex-direction: column;
-    height: auto;
+    height: 100vh;
+    justify-content: flex-start;
+    overflow: scroll;
 }
 
 .modal_background {

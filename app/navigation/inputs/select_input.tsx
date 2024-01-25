@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import Select, { ActionMeta, ControlProps, IndicatorsContainerProps, MultiValue, components } from 'react-select';
+import Select, { ActionMeta, ControlProps, IndicatorsContainerProps, MultiValue, SingleValue, components } from 'react-select';
 import styles from './select_input.module.scss'
 import clsx from 'clsx';
 import Image from 'next/image';
@@ -15,6 +15,7 @@ export type SelectInputProps = {
     options: any[]
     onChange: (...args: any) => any
     value: string
+    isSingleValue?: boolean
     inModal?: boolean
     searchParam?: string
 }
@@ -29,7 +30,7 @@ export type SelectInputProps = {
 
 const lalia = Laila({ weight: ["400"], style: "normal", subsets: ["latin"] });
 
-export default function SelectInput({options, onChange, value, inModal, searchParam}: SelectInputProps) {
+export default function SelectInput({options, onChange, value, inModal, searchParam, isSingleValue}: SelectInputProps) {
     //have to seperate bc onChange being weird
     const [width, setWidth] = useState(0);
     const [height, setHeight] = useState(0);
@@ -42,10 +43,16 @@ export default function SelectInput({options, onChange, value, inModal, searchPa
     for (const option of options) {
         OptionsMap[option.value] = option;
     }
-
-    const defaultValues = [];
-    for (const options of value.split(',')) {
-        defaultValues.push(OptionsMap[options]);
+    
+    let defaultValues;
+    if (isSingleValue) {
+        defaultValues = OptionsMap[value];
+    }
+    else {
+        defaultValues = [];
+        for (const options of value.split(',')) {
+            defaultValues.push(OptionsMap[options]);
+        }
     }
   
     const input = useCallback((node: HTMLInputElement | null) => {
@@ -55,9 +62,16 @@ export default function SelectInput({options, onChange, value, inModal, searchPa
       }
     }, [change]);
 
-    const onChangeHandler = (newValue: MultiValue<any>) => {
+    const onChangeHandler = (newValue: MultiValue<any> | SingleValue<any>) => {
         setChange(!change);
-        onChange(newValue.map((option) => option.value).join(','));
+
+        if (isSingleValue) {
+            if (searchParam === "has_upcast") console.log(newValue);
+            onChange(newValue.value);
+            return;
+        }
+        
+        onChange(newValue.map((option: any) => option.value).join(','));
     }
 
     useEffect(() => {
@@ -89,7 +103,7 @@ export default function SelectInput({options, onChange, value, inModal, searchPa
             <div className={clsx(styles.input_container, lalia.className)}>
                 <Image src="/border.svg" alt="border" priority={true} className={clsx(styles.border)} width={220} height={37} ref={border} />
                 <Select
-                    isMulti
+                    isMulti={!isSingleValue}
                     unstyled
                     name="colors"
                     options={options}

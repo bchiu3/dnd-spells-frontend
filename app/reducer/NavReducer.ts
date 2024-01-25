@@ -11,7 +11,11 @@ export const Setters: {[key: string]: string} = {
     "cast_type": "setCastType",
     "school": "setSchool",
     "range_type": "setRangeType",
-    "components": "setComponents"
+    "components": "setComponents",
+    "has_upcast": "setHasUpcast",
+    "is_ritual": "setIsRitual",
+    "is_concentration": "setIsConcentration",
+    "is_recommended": "setIsRecommended",
 }
 
 export const initialParamState = {
@@ -23,7 +27,11 @@ export const initialParamState = {
         "cast_type": "",
         "school": "",
         "range_type": "",
-        "components": ""
+        "components": "",
+        "has_upcast": "",
+        "is_ritual": "",
+        "is_concentration": "",
+        "is_recommended": "",
     },
     "page": 1
 };
@@ -118,6 +126,46 @@ export const ParamsReducer = (state: any, action: any) => {
                 "params": {
                     ...state.params,
                     "components": action.payload
+                },
+                "page": 1
+            }
+        case "setHasUpcast":
+            return {
+                ...state,
+                "spells": [],
+                "params": {
+                    ...state.params,
+                    "has_upcast": action.payload
+                },
+                "page": 1
+            }
+        case "setIsRitual":
+            return {
+                ...state,
+                "spells": [],
+                "params": {
+                    ...state.params,
+                    "is_ritual": action.payload
+                },
+                "page": 1
+            }
+        case "setIsConcentration":
+            return {
+                ...state,
+                "spells": [],
+                "params": {
+                    ...state.params,
+                    "is_concentration": action.payload
+                },
+                "page": 1
+            }
+        case "setIsRecommended":
+            return {
+                ...state,
+                "spells": [],
+                "params": {
+                    ...state.params,
+                    "is_recommended": action.payload
                 },
                 "page": 1
             }
