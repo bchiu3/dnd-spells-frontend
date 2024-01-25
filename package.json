@@ -9,6 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@serwist/next": "^8.4.3",
+    "@serwist/precaching": "^8.4.3",
+    "@serwist/sw": "^8.4.3",
     "@vercel/postgres": "^0.5.1",
     "clsx": "^2.1.0",
     "framer-motion": "^10.18.0",

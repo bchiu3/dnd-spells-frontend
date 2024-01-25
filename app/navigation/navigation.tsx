@@ -22,11 +22,9 @@ const variants = {
 
 const variantsModal = {
     hidden: {
-        opacity: 0,
         y: "-100vh",
     },
     visible: {
-        opacity: 1,
         y: 0,
     }
 }
