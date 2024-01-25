@@ -48,7 +48,7 @@ $modal_height: min(95vh, $max_modal_height);
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-    height: calc($modal_height * .60);
+    height: calc($modal_height * .50);
     ul {
         list-style: disc;
         margin-left: 1rem;
