@@ -10,7 +10,7 @@ import React from "react"
 
 export interface SpellCardModalProps {
     modal: boolean
-    setModal: (value: boolean) => void
+    closeModal: MouseEventHandler<HTMLElement>
     spell: Spell
 }
 
@@ -27,12 +27,7 @@ const variants = {
 
 const lalia = Laila({ weight: ["400", "700"], style: "normal", subsets: ["latin"] });
 
-export default function SpellCardModal({modal, setModal, spell}: SpellCardModalProps) {
-    const closeModal = (e: any) => {
-        e.stopPropagation();
-        setModal(false);
-        document.body.style.overflow = 'unset';
-    }
+export default function SpellCardModal({modal, closeModal, spell}: SpellCardModalProps) {
 
     const upcast = (spell.has_upcast ? ("<p>Upcast:" + spell.upcast + "</p></br>").toString() : "");
 

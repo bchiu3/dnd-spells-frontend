@@ -1,9 +1,11 @@
 import clsx from 'clsx';
-import styles from '../navigation.module.scss';
-import { useCallback, useContext, useEffect, useRef, useState } from 'react';
+import styles from './search_input.module.scss';
+import { ChangeEventHandler, useCallback, useContext, useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { reducerContext } from '@/app/reducer/NavReducer';
+import { Laila } from 'next/font/google';
+import { sanitizeSearchParams } from '@/app/utils';
 
 interface Size {
     width: number,
@@ -12,34 +14,44 @@ interface Size {
 
 export interface SearchInputProps {
     placeholder: string,
-    onChange: (value: string) => void
+    onChange: Function
+    value: string
+    inModal?: boolean
+    searchParam?: string
 }
 
-export default function SearchInput({placeholder, onChange}: SearchInputProps) {
-    const [width, setWidth] = useState(0);
+const lalia = Laila({ weight: ["400"], style: "normal", subsets: ["latin"] });
+
+export default function SearchInput({placeholder, onChange, value, inModal, searchParam}: SearchInputProps) {
+    const [size, setSize] = useState<Size>({ width: 0, height: 0 });
     const border = useRef<HTMLImageElement>(null);
     const search = useRef<HTMLImageElement>(null);
+    searchParam = searchParam || "";
   
     const input = useCallback((node: HTMLInputElement | null) => {
       if (node !== null) {
-        setWidth(node.getBoundingClientRect().width);
+        setSize({ width: node.getBoundingClientRect().width, height: node.getBoundingClientRect().height});
       }
     }, []);
 
     useEffect(() => {
         if (border.current !== null) {
-            border.current.style.width = `${width - (width * 0.1)}px`;
+            border.current.style.width = `${size.width - (size.width * 0.1)}px`;
+            border.current.style.height = `${size.height + (size.height * 0.3)}px`;
         }
         if (search.current !== null) {
-            search.current.style.transform = `translateX(${(width/2) - (width * 0.1)}px)`
+            search.current.style.transform = `translateX(${(size.width/2) - (size.width * 0.1)}px)`
         }
-    }, [width]);
+    }, [size]);
 
     return (
-        <div className={styles.input_container}> 
-            <Image src="/border.svg" alt="border" priority={true} className={clsx(styles.border)} width={220} height={37} ref={border}/>
-            <input type="text" className={styles.search} placeholder={placeholder} ref={input} onChange={(e) => onChange(e.target.value)}/>
-            <Image className={styles.search_icon} src="/search_icon.svg" alt="search-icon" width={16} height={16} ref={search} priority={true}/>
+        <div className='flex flex-col gap-[2px] flex-grow'>
+            <div className={clsx(styles.label, lalia.className)}>{sanitizeSearchParams(searchParam)}</div>
+            <div className={clsx(styles.input_container, lalia.className)}> 
+                <Image src="/border.svg" alt="border" priority={true} className={clsx(styles.border)} width={220} height={37} ref={border} />
+                <input type="text" className={clsx(styles.search, inModal && styles.search_modal)} placeholder={placeholder} value={value} ref={input} onChange={(e) => onChange(e.target.value)}/>
+                <Image className={styles.search_icon} src="/search_icon.svg" alt="search-icon" width={16} height={16} ref={search} priority={true}/>
+            </div>
         </div>
     );
 }

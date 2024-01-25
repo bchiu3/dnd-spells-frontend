@@ -43,6 +43,7 @@ export default function SpellCard({spell}: SpellCardProps) {
     useEffect(() => {
         if (border.current !== null) {
             border.current.style.height = `${size.height + (size.height * 0.2)}px`;
+            border.current.style.width = `${size.width - (size.width * 0.05)}px`;
         }
     }, [size]);
 
@@ -50,10 +51,16 @@ export default function SpellCard({spell}: SpellCardProps) {
     const onClickHandler = () => {
         setModal(true);
         document.body.style.overflow = 'hidden';
+    };
+
+    const closeModalHandler = (e: any) => {
+        e.stopPropagation();
+        setModal(false);
+        document.body.style.overflow = 'unset';
     }
 
     const modalHTML = createPortal(
-        <SpellCardModal modal={modal} setModal={setModal} spell={spell}/>,
+        <SpellCardModal modal={modal} closeModal={closeModalHandler} spell={spell}/>,
         document.body
     );
 

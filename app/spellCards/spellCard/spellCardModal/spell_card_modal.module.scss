@@ -1,7 +1,7 @@
-@use 'app/styles/variables' as *;
+@use 'app/variables/variables' as *;
 
-$max_modal_width: 500px;
-$max_modal_height: 700px;
+$max-modal-width: 500px;
+$max-modal-height: 700px;
 $modal_width: min(90vw, $max_modal_width);
 $modal_height: min(95vh, $max_modal_height);
 

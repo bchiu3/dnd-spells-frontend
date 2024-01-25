@@ -1,4 +1,4 @@
-@use 'app/styles/variables' as *;
+@use 'app/variables/variables' as *;
 
 .module {
     border-image: linear-gradient(to right, $border-color-gradient-start, $border-color-gradient-end) 1;
@@ -6,33 +6,18 @@
     display: flex;
     align-items: center;
     gap: 8px;
+    background: rgba(0, 0, 0, 0.90);
 };
 
-.search {
-    border: 0;
-    outline: 0;
-    background: $peach-tone;
-    color: black;
-    font-size: 16px;
-    height: 27px;
-    padding: 0px 1em;
-    box-sizing: border-box;
-};
-
-.input_container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: row;
-    flex: 1 0 auto;
-};
-
-.border {
-    position: absolute;
-    height: 60%;
-    pointer-events: none;
+.module_modal {
+    flex-direction: column;
+    height: auto;
 }
 
-.search_icon {
-    position: absolute;
-};
+.modal_background {
+    position:absolute;
+    width: 100vw;
+    height: 100vh;
+    left: 0;
+    top: 0;
+}

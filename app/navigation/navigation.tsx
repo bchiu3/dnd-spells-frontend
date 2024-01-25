@@ -2,11 +2,13 @@ import styles from './navigation.module.scss';
 import clsx from 'clsx';
 import Image from 'next/image';
 import SearchInput from './inputs/search_input';
-import { useDebouncedCallback } from 'use-debounce';
-import { useContext, useEffect, useState } from 'react';
+import { DebouncedState, useDebouncedCallback } from 'use-debounce';
+import { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import { reducerContext, Setters } from '../reducer/NavReducer';
 import { AnimatePresence, motion } from 'framer-motion';
 import { SelectOptions } from '../utils';
+import SelectInput from './inputs/select_input';
+import { createPortal } from 'react-dom';
 
 
 const variants = {
@@ -18,38 +20,102 @@ const variants = {
     }
 }
 
+const variantsModal = {
+    hidden: {
+        opacity: 0,
+        y: "-100vh",
+    },
+    visible: {
+        opacity: 1,
+        y: 0,
+    }
+}
+
+interface Seacher {
+    value: string,
+    changeHandler: DebouncedState<any>,
+    selectOptions: any[],
+    searchParam: string,
+}
 
 export default function Navigation() {
     const { state, dispatch } = useContext(reducerContext);
-    const [modal, setModal] = useState(false);
+    const [navModal, setNavModal] = useState(false);
 
-    const searchTerms = []; 
+
+    const searchTerms: Seacher[] = []; 
     for (const [key, value] of Object.entries(state.params)) {
         const searcher = {
+            searchParam: key,
             value: value,
-            changeHandler: (newValue: any) => {
-                dispatch({type: Setters[key], payload: newValue});
-            },
-            selectOptions: SelectOptions[key]
+            changeHandler: useDebouncedCallback((newValue: any) => {console.log(newValue); dispatch({type: Setters[key], payload: newValue})}),
+            selectOptions: SelectOptions[key],
         }
         searchTerms.push(searcher);
     };
 
+
+    const openModal = (e: any) => {
+        searchTerms[0].changeHandler.cancel();
+        setNavModal(true);
+        document.body.style.overflow = 'hidden';
+    };
+
+
+    const closeModal = (e: any) => {
+        for (const searcher of searchTerms) {
+            searcher.changeHandler.cancel();
+        }
+        setNavModal(false);
+        document.body.style.overflow = 'unset';
+    };
+
     return (
+        <>
         <AnimatePresence>
-            {modal ?? 
+            {
+            navModal &&
+                <motion.div 
+                key="navModal"
+                variants={variantsModal}
+                initial = "hidden"
+                animate = "visible"
+                exit="hidden"
+                transition={{duration: 0.25, ease: "easeInOut"}}
+                className={clsx("fixed top-0 w-screen border-b-4 z-10 pt-1 pb-5", styles.module, styles.module_modal)}>
+                    <Image className={"py-1"} src="/header-logo.png" alt="dnd-spells-logo" width={108} height={71} priority={true}/>
+                    {searchTerms.map((searcher, index) => {
+                        if (searcher.selectOptions){
+                            return <SelectInput key={index} value={searcher.value} inModal
+                                onChange={searcher.changeHandler} options={searcher.selectOptions} searchParam={searcher.searchParam}/>
+                        }
+                        return <SearchInput key={index} placeholder={''} onChange={searcher.changeHandler} 
+                            searchParam={searcher.searchParam} value={searcher.value} inModal />
+                    })}
+                    <Image className={"absolute right-0 mt-1 mr-2"} src="/exit.svg" alt="hamburger-icon" width={17} height={20} onClick={closeModal} />
+                    {createPortal(
+                        <div onClick={closeModal} className={styles.modal_background} />,
+                        document.body
+                    )}
+                </motion.div>
+            }
+            {
+            !navModal &&
             <motion.div 
+            key="nav"
             variants={variants}
             initial = "hidden"
             animate = "visible"
-            exit = "hidden"
-            transition={{duration: 0.1, ease: "easeInOut"}}
-            className={clsx("fixed top-0 w-screen border-b-4 bg-black z-10", styles.module)}>
+            exit="hidden"
+            transition={{duration: 0.25, ease: "easeInOut"}}
+            className={clsx("fixed top-0 w-screen border-b-4 z-10", styles.module)}>
                 <Image className={"pl-1"} src="/header-logo.png" alt="dnd-spells-logo" width={58} height={38} priority={true}/>
-                <SearchInput placeholder={''}
-                onChange={useDebouncedCallback(searchTerms[0].changeHandler, 500)} />
-                <Image src="/hamburger_icon.svg" alt="hamburger-icon" width={17} height={20} className='mr-4'/>
-            </motion.div>}
+                <SearchInput placeholder={''} value={searchTerms[0].value}
+                onChange={searchTerms[0].changeHandler} />
+                <Image src="/hamburger_icon.svg" alt="hamburger-icon" width={17} height={20} className='mr-4' onClick={openModal} />
+            </motion.div>
+            }
         </AnimatePresence>
+        </>
     )
 }

@@ -3,8 +3,8 @@ import Select, { ActionMeta, ControlProps, IndicatorsContainerProps, MultiValue,
 import styles from './select_input.module.scss'
 import clsx from 'clsx';
 import Image from 'next/image';
-import createCache from '@emotion/cache';
-import { CacheProvider } from '@emotion/react';
+import { Laila } from "next/font/google"
+import { sanitizeSearchParams } from '@/app/utils';
 
 interface Size {
     width: number,
@@ -13,7 +13,10 @@ interface Size {
 
 export type SelectInputProps = {
     options: any[]
-    onChange: (value: string) => void
+    onChange: Function
+    value: string
+    inModal?: boolean
+    searchParam?: string
 }
 
 // const loadOptions = (
@@ -24,26 +27,44 @@ export type SelectInputProps = {
 //     }, 1000);
 //   };
 
+const lalia = Laila({ weight: ["400"], style: "normal", subsets: ["latin"] });
 
-export default function SelectInput({options, onChange}: SelectInputProps) {
-    const [size, setSize] = useState(0);
+export default function SelectInput({options, onChange, value, inModal, searchParam}: SelectInputProps) {
+    //have to seperate bc onChange being weird
+    const [width, setWidth] = useState(0);
     const [height, setHeight] = useState(0);
     const [change, setChange] = useState(false);
     const border = useRef<HTMLImageElement>(null);
+    searchParam = searchParam || "";
+
+    const OptionsMap: {[key:string]: any}= {};
+    for (const option of options) {
+        OptionsMap[option.value] = option;
+    }
+
+    const defaultValues = [];
+    for (const options of value.split(',')) {
+        defaultValues.push(OptionsMap[options]);
+    }
   
     const input = useCallback((node: HTMLInputElement | null) => {
       if (node !== null) {
-        setSize(node.getBoundingClientRect().width);
+        setWidth(node.getBoundingClientRect().width);
         setHeight(node.getBoundingClientRect().height);
       }
     }, [change]);
 
+    const onChangeHandler = (newValue: MultiValue<any>) => {
+        setChange(!change);
+        onChange(newValue.map((option) => option.value).join(','));
+    }
+
     useEffect(() => {
         if (border.current !== null) {
-            border.current.style.width = `${size - (size * 0.1)}px`;
+            border.current.style.width = `${width - (width * 0.1)}px`;
             border.current.style.height = `${height + (height * 0.2)}px`;
         }
-    }, [size, height]);
+    }, [width, height]);
     
     const Control = ({ children, ...props } : ControlProps) => {
         return (
@@ -62,28 +83,32 @@ export default function SelectInput({options, onChange}: SelectInputProps) {
     }
 
     return (
-        <div className={styles.input_container}>
-            <Image src="/border.svg" alt="border" priority={true} className={clsx(styles.border)} width={220} height={37} ref={border} />
-            <Select
-                isMulti
-                unstyled
-                name="colors"
-                options={options}
-                closeMenuOnSelect={false}
-                hideSelectedOptions={false}
-                placeholder=""
-                isClearable={false}
-                className={styles.input}
-                onChange={(value, action) => setChange(!change)}
-                components={{ Control, IndicatorsContainer }}
-                classNames={{
-                    control: (state) => clsx(styles.select_control),
-                    container: (state) => clsx(styles.select_container),
-                    valueContainer: (state) => clsx(styles.select_valueContainer),
-                    multiValue: (state) => clsx(styles.select_multiValue),
-                    menu: (state) => clsx(styles.select_menu),
-                    indicatorsContainer: (state) => clsx(styles.select_indicatorsContainer),
-                }} />
+        <div className='flex flex-col gap-[2px]'>  
+            <div className={clsx(styles.label, lalia.className)}>{sanitizeSearchParams(searchParam)}</div>
+            <div className={clsx(styles.input_container, lalia.className)}>
+                <Image src="/border.svg" alt="border" priority={true} className={clsx(styles.border)} width={220} height={37} ref={border} />
+                <Select
+                    isMulti
+                    unstyled
+                    name="colors"
+                    options={options}
+                    closeMenuOnSelect={false}
+                    hideSelectedOptions={false}
+                    placeholder=""
+                    isClearable={false}
+                    className={clsx(styles.input, inModal && styles.input_modal)}
+                    defaultValue={defaultValues}
+                    onChange={onChangeHandler}
+                    components={{ Control, IndicatorsContainer }}
+                    classNames={{
+                        control: (state) => clsx(styles.select_control, inModal && styles.select_control_modal),
+                        container: (state) => clsx(styles.select_container),
+                        valueContainer: (state) => clsx(styles.select_valueContainer),
+                        multiValue: (state) => clsx(styles.select_multiValue),
+                        menu: (state) => clsx(styles.select_menu),
+                        indicatorsContainer: (state) => clsx(styles.select_indicatorsContainer),
+                    }} />
+            </div>
         </div>
     )
 };

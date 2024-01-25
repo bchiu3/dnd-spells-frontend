@@ -1,0 +1,43 @@
+@use 'app/variables/variables' as *;
+@use 'app/variables/nav' as *;
+
+.border {
+    position: absolute;
+    pointer-events: none;
+}
+
+.search {
+    border: 0;
+    outline: 0;
+    background: $peach-tone;
+    color: black;
+    font-size: 16px;
+    height: $selector-height;
+    padding: 0px 1em;
+    box-sizing: border-box;
+    width: min(80%, $max-nav-input-width);
+}
+
+.search_modal {
+    width: min(90vw, $max-modal-nav-input-width);
+    padding: 0 1.5em;
+}
+
+.input_container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    flex: 1 0 auto;
+}
+
+.search_icon {
+    position: absolute;
+}
+
+.label {
+    align-self: flex-start;
+    font-size: $nav-select-font-size;
+    color: white;
+    text-transform: capitalize;
+}

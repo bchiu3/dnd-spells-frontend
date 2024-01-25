@@ -7,6 +7,11 @@ export const Setters: {[key: string]: string} = {
     "page": "setPage",
     "name": "setSpellName",
     "level": "setLevel",
+    "class": "setClass",
+    "cast_type": "setCastType",
+    "school": "setSchool",
+    "range_type": "setRangeType",
+    "components": "setComponents"
 }
 
 export const initialParamState = {
@@ -14,7 +19,11 @@ export const initialParamState = {
     "params": {
         "name": "",
         "class": "",
-        "level": ""
+        "level": "",
+        "cast_type": "",
+        "school": "",
+        "range_type": "",
+        "components": ""
     },
     "page": 1
 };
@@ -44,6 +53,7 @@ export const ParamsReducer = (state: any, action: any) => {
         //changing any search params means we need to reset the page and clear out the spells
         case "setSpellName":
             return {
+                ...state,
                 "spells": [],
                 "params": {
                     ...state.params,
@@ -54,18 +64,62 @@ export const ParamsReducer = (state: any, action: any) => {
         case "setClass":
             return {
                 ...state,
+                "spells": [],
                 "params": {
                     ...state.params,
                     "class": action.payload
-                }
+                },
+                "page": 1
             }
         case "setLevel":
             return {
                 ...state,
+                "spells": [],
                 "params": {
                     ...state.params,
-                    "levels": action.payload
-                }
+                    "level": action.payload
+                },
+                "page": 1
+            }
+        case "setCastType":
+            return {
+                ...state,
+                "spells": [],
+                "params": {
+                    ...state.params,
+                    "cast_type": action.payload
+                },
+                "page": 1
+            }
+        case "setSchool":
+            return {
+                ...state,
+                "spells": [],
+                "params": {
+                    ...state.params,
+                    "school": action.payload
+                },
+                "page": 1
+            }
+        case "setRangeType":
+            return {
+                ...state,
+                "spells": [],
+                "params": {
+                    ...state.params,
+                    "range_type": action.payload
+                },
+                "page": 1
+            }
+        case "setComponents":
+            return {
+                ...state,
+                "spells": [],
+                "params": {
+                    ...state.params,
+                    "components": action.payload
+                },
+                "page": 1
             }
         default:
             return state
