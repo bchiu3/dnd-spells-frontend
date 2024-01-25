@@ -44,6 +44,7 @@ $modal_height: min(95vh, $max_modal_height);
 .modal_description{
     color: #000;
     overflow: scroll;
+    -webkit-overflow-scrolling: touch;
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
