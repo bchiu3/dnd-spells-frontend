@@ -78,7 +78,7 @@ export default function Navigation() {
                 exit="hidden"
                 transition={{duration: 0.25, ease: "easeInOut"}}
                 className={clsx("fixed top-0 w-screen border-b-4 z-10 pt-1 pb-5", styles.module, styles.module_modal)}>
-                    <Image className={"py-1"} src="/header-logo.png" alt="dnd-spells-logo" width={108} height={71} priority={true}/>
+                    <Image className={"pt-1"} src="/header-logo.png" alt="dnd-spells-logo" width={71} height={71} priority={true}/>
                     {searchTerms.map((searcher, index) => {
                         if (searcher.selectOptions){
                             return <SelectInput key={index} value={searcher.value} inModal isSingleValue={!!SingleValueOptions[searcher.searchParam]}

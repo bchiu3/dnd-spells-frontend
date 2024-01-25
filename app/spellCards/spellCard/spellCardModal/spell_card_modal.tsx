@@ -48,7 +48,7 @@ export default function SpellCardModal({modal, closeModal, spell}: SpellCardModa
                     <Image src="/exit.svg" alt="exit" width={19} height={26} onClick={closeModal} className="self-end mr-2 mt-1 p-0" priority={true}/>
                     <motion.div className={clsx(style.modal, lalia.className)}>
                         <motion.div className={style.modal_header}>
-                            <Image src={spell.image_url || "/header-logo.png"} alt="spell-card" width={100} height={100}/>
+                            <Image src={spell.image_url || "/placeholder.png"} alt="spell-card" width={100} height={100}/>
                             <span>{spell.name}</span>
                         </motion.div>
 
