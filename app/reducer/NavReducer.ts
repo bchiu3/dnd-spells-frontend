@@ -7,7 +7,7 @@ export const Setters: {[key: string]: string} = {
     "page": "setPage",
     "name": "setSpellName",
     "level": "setLevel",
-    "class": "setClass",
+    "classes": "setClasses",
     "cast_type": "setCastType",
     "school": "setSchool",
     "range_type": "setRangeType",
@@ -71,7 +71,7 @@ export const ParamsReducer = (state: any, action: any) => {
                 },
                 "page": 1
             }
-        case "setClass":
+        case "setClasses":
             return {
                 ...state,
                 "spells": [],

@@ -39,7 +39,7 @@ export const SelectValueMap: {[key: string]: {[key: string]: string}} = {
       [SpellLevel.EighthLevel.toString()]: "Level 8",
       [SpellLevel.NinthLevel.toString()]: "Level 9",
     },
-    "class": {
+    "classes": {
       [SpellClass.Artificer]: "Artificer",
       [SpellClass.Bard]: "Bard",
       [SpellClass.Cleric]: "Cleric",
