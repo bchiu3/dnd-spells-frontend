@@ -46,6 +46,10 @@ export default function SearchInput({placeholder, onChange, value, inModal, sear
         }
     }, [size]);
 
+    useEffect(() => {
+        setHoldValue(value);
+    }, [value]);
+
 
     const debounced = useDebouncedCallback(onChange, 300);
 

@@ -31,6 +31,13 @@ $modal_height: min(95vh, $max_modal_height);
     font-style: normal;
     font-weight: 700;
     line-height: normal;
+    gap: 8px;
+}
+
+.modal_image {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
 }
 
 .modal_line {

@@ -17,6 +17,14 @@ const nextConfig = {
     },
     images: {
       disableStaticImages: true,
+      remotePatterns: [
+        {
+          protocol: 'https',
+          hostname: process.env.NEXT_PUBLIC_DND_BUCKET_NAME + ".s3.amazonaws.com",
+          port: '',
+          pathname: '/media/**',
+        },
+      ],
     }
 };
 export default withSerwist(nextConfig);
