@@ -20,7 +20,7 @@ const nextConfig = {
       remotePatterns: [
         {
           protocol: 'https',
-          hostname: process.env.NEXT_PUBLIC_DND_BUCKET_NAME + ".s3.amazonaws.com",
+          hostname: `${process.env.NEXT_PUBLIC_DND_BUCKET_NAME}.s3.amazonaws.com`,
           port: '',
           pathname: '/media/**',
         },
