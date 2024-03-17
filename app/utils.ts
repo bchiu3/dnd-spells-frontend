@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import { CastType, ComponentType, RangeType, SchoolType, SpellClass, SpellLevel, levelsString } from "./types/types";
 
+/* Get param string from a dictionary of state_params*/
 export function getParamString(state_params: any) {
     const params = new URLSearchParams();
     for (const [key, value] of Object.entries(state_params)) {
@@ -11,6 +12,7 @@ export function getParamString(state_params: any) {
     return params.toString();
 }
 
+/*Extra hook for mounting and unmounting*/
 export function useDidUpdateEffect(fn: Function, inputs: any[]) {
     const isMountingRef = useRef(false);
     useEffect(() => {
@@ -26,6 +28,7 @@ export function useDidUpdateEffect(fn: Function, inputs: any[]) {
     }, inputs);
   }
 
+/*Map values to select options*/
 export const SelectValueMap: {[key: string]: {[key: string]: string}} = {
     "level": {
       [SpellLevel.Cantrip.toString()]: "Cantrip",
@@ -104,6 +107,7 @@ export const SelectValueMap: {[key: string]: {[key: string]: string}} = {
     },
 }
 
+/*Map values to options*/
 export const SingleValueOptions: {[key: string]: boolean} = {
   "has_upcast": true,
   "is_ritual": true,
@@ -111,6 +115,7 @@ export const SingleValueOptions: {[key: string]: boolean} = {
   "is_recommended": true,
 }
 
+/*Options for selection, used for filtering*/
 export const SelectOptions: {[key: string]: {value: string, label: string}[]} = {}; 
 
 for (const [key, value] of Object.entries(SelectValueMap)) {
@@ -120,6 +125,7 @@ for (const [key, value] of Object.entries(SelectValueMap)) {
     }
 }
 
+/* Sanitize search params, usually only used to render*/
 export const sanitizeSearchParams = (params: string) => {
   return params.toLowerCase().trim().split("_").join(" ")
 }

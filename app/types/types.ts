@@ -1,3 +1,4 @@
+/*Spell Levels*/
 export enum SpellLevel {
     Cantrip = 0,
     FirstLevel = 1,
@@ -11,6 +12,7 @@ export enum SpellLevel {
     NinthLevel = 9
 }
 
+/*Levels strings, used for rendering*/
 export const levelsString = {
     0: "Cantrip",
     1: "Level 1",
@@ -24,6 +26,7 @@ export const levelsString = {
     9: "Level 9",
 }
 
+/*Spell Classes*/
 export enum SpellClass {
     Artificer = "artificer",
     Bard = "bard",
@@ -36,12 +39,14 @@ export enum SpellClass {
     Wizard = "wizard"
 }
 
+/*Spell Components, can be more than one*/
 export enum ComponentType {
     Verbal = "Verbal",
     Somatic = "Somatic",
     Material = "Material"
 }
 
+/*School types, mostly again for searching*/
 export enum SchoolType {
     Abjuration = "abjuration",
     Conjuration = "conjuration",
@@ -54,6 +59,7 @@ export enum SchoolType {
     Unknown = "unknown"
 }
 
+/*Range Types, used for search*/
 export enum RangeType {
     Self = "Self",
     Touch = "Touch",
@@ -64,6 +70,7 @@ export enum RangeType {
     Unknown = "Unknown"
 }
 
+/*Cast Types, used for searching*/
 export enum CastType {
     Action = "Action",
     Bonus = "Bonus",
@@ -72,6 +79,8 @@ export enum CastType {
     Unknown = "Unknown"
 }
 
+/*Spell Interface, used to cast from JSON into a semi-structured object.
+    Includes an index for animations, only used when rendering*/
 export interface Spell {
     _id: string,
     name: string,
