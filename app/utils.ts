@@ -129,3 +129,16 @@ for (const [key, value] of Object.entries(SelectValueMap)) {
 export const sanitizeSearchParams = (params: string) => {
   return params.toLowerCase().trim().split("_").join(" ")
 }
+
+export function useDebounceFunc(func: Function, milliseconds: number) {
+  const time = milliseconds || 400
+  let timer: any
+
+  return (event: any) => {
+      if (timer) {
+          clearTimeout(timer)
+      }
+
+      timer = setTimeout(func, time, event)
+  }
+}
