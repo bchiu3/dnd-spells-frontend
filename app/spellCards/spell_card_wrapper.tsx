@@ -4,7 +4,7 @@ import SpellCard from './spellCard/spell_card';
 import { useInView } from 'react-intersection-observer';
 import { useContext, useEffect, useState } from 'react';
 import { reducerContext } from '../reducer/NavReducer';
-import getSpells from '@/lib/spells';
+import { getSpells } from '@/lib/spells';
 import { getParamString, useDidUpdateEffect } from '../utils';
 import React from 'react';
 import { AnimatePresence, motion } from 'framer-motion';

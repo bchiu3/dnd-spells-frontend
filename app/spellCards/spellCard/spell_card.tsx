@@ -1,13 +1,15 @@
 import clsx from "clsx";
 import styles from "./spell_card.module.scss";
 import {Spell} from "../../types/types";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import SpellCardDescription from "./spell_card_description";
 import SpellCardIcons from "./spell_card_icons";
 import { createPortal } from "react-dom";
 import SpellCardModal from "./spellCardModal/spell_card_modal";
 import Image from "next/image";
+import { getSpecificSpell } from "@/lib/spells";
+import { reducerContext } from "@/app/reducer/NavReducer";
 
 export interface SpellCardProps {
     spell: Spell
@@ -31,6 +33,7 @@ const variants = {
 export default function SpellCard({spell, children}: SpellCardProps) {
     const [selectedId, setSelectedId] = useState<string | undefined>(undefined);
     const [size, setSize] = useState<Size>({ width: 0, height: 0 });
+    const { state, dispatch } = useContext(reducerContext);
     const border = useRef<HTMLImageElement>(null);
 
     const [modal, setModal] = useState<boolean>(false);
@@ -50,7 +53,14 @@ export default function SpellCard({spell, children}: SpellCardProps) {
 
 
     const onClickHandler = () => {
-        setModal(true);
+        getSpecificSpell(spell._id).then((data) => {
+            dispatch({type: "setSpell", payload: data});
+        }).catch((err) => {
+            //something happened
+            console.log(err);
+        }).finally(() => {
+            setModal(true);
+        })
         document.body.style.overflow = 'hidden';
     };
 

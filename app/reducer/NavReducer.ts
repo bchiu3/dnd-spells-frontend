@@ -45,6 +45,19 @@ export const ParamsReducer = (state: any, action: any) => {
                 ...state,
                 "spells": addIndexSpells(action.payload)
             }
+        case "setSpell":
+            {
+                let spells = state.spells.map((element: Spell) => {
+                    if (element.name == action.payload.name) {
+                        return action.payload
+                    }
+                    return element
+                });
+                return {
+                    ...state,
+                    "spells": spells
+                }
+            }
         case "addSpells":
             return {
                 ...state,

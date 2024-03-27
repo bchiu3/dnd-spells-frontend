@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import getSpells from "@/lib/spells";
 import { Suspense, createContext, useEffect, useState } from "react";
 import { useSearchParams } from 'next/navigation';
 import Navigation from "@/app/navigation/navigation";
