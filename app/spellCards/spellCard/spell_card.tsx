@@ -58,9 +58,8 @@ export default function SpellCard({spell, children}: SpellCardProps) {
         }).catch((err) => {
             //something happened
             console.log(err);
-        }).finally(() => {
-            setModal(true);
         })
+        setModal(true);
         document.body.style.overflow = 'hidden';
     };
 
